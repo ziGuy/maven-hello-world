@@ -54,6 +54,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Get build
       uses: actions/download-artifact@v2
       with:
