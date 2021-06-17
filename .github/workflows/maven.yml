@@ -52,10 +52,12 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    uses: actions/setup-java@v2
+    - uses: actions/setup-java@v2
       with:
         java-version: '8' # doesn't work with later versions
         distribution: 'adopt'
+    - name: Show file structure
+      run: ls -Rl my-app/target
     - run: mvn --batch-mode --update-snapshots verify
     - run: mkdir staging && cp my-app/target/*.jar staging
     - uses: actions/upload-artifact@v2
@@ -63,9 +65,6 @@ jobs:
         name: Package
         path: staging
 
-    - name: Show file structure
-      run: |
-        ls -Rl my-app/target
 
 
   # Packaging:     
