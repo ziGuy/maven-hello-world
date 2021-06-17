@@ -22,9 +22,6 @@ jobs:
       run: |
         echo "FROM openjdk:8" >>Dockerfile
         echo "MAINTAINER Guy Ziv guyziv84@gmail.com" >>Dockerfile
-      # echo "COPY ${jar_path} /usr/src/${app_name}/" >>Dockerfile
-      # echo "WORKDIR /usr/src/${app_name}" >>Dockerfile
-      # echo "CMD ["java", "-jar", "/usr/src/${app_name}/${jar_path}"]" >>Dockerfile
         echo CMD ["date"] >>Dockerfile
         
         cat Dockerfile
