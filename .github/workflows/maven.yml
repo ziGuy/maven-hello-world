@@ -101,6 +101,7 @@ jobs:
     - name: Push docker to repo
       run: |
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        docker tag ${{ env.APP_NAME }} . ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
       # run: |
       # docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       # docker tag ${{ env.APP_NAME }} . ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
