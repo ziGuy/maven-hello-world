@@ -81,15 +81,16 @@ jobs:
       with:
         name: final_exec
     - name: Build Dockerfile
+        # echo "FROM openjdk:8" >>Dockerfile
       run: |
-        echo "FROM openjdk:8" >>Dockerfile
+        echo "FROM openjdk:8-jre-alpine3.9" >>Dockerfile
         echo "MAINTAINER Guy Ziv guyziv84@gmail.com" >>Dockerfile
         echo "WORKDIR /usr/src/${{ env.APP_NAME }}" >>Dockerfile
         echo "COPY ${{ env.APP_NAME }}-1.0-SNAPSHOT.jar /usr/src/${{ env.APP_NAME }}/" >>Dockerfile
         echo "WORKDIR /usr/src/${{ env.APP_NAME }}" >>Dockerfile
         echo 'CMD ["java", "-jar", "/usr/src/${{ env.APP_NAME }}/${{ env.APP_NAME }}-1.0-SNAPSHOT.jar"]' >>Dockerfile
         
-        docker build -f Dockerfile -t $rafael/${{ env.APP_NAME }} .
+        docker build -f Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.APP_NAME }} .
         
         docker images
 
@@ -97,7 +98,7 @@ jobs:
       run: |
         docker images
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        docker push rafael/${{ env.APP_NAME }}
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.APP_NAME }}
 
       # docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
       # docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
