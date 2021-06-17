@@ -23,7 +23,20 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B package --file my-app/pom.xml
+    
     - name: Display results
       run: |
-        ls -Rl my-app/target
         java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
+      if: ${{ dummy }}
+      
+    - name: Packaging
+      run: mvn --batch-mode --update-snapshots verify
+           mkdir staging && cp target/*.jar staging
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Package
+        path: staging
+
+    - name: Show file structure
+      run: |
+        ls -Rl my-app/target
