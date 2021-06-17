@@ -25,5 +25,5 @@ jobs:
       run: mvn -B package --file my-app/pom.xml
     - name: Display results
       run: |
-        echo "A initial message"
         ls -Rl my-app/target
+        java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
