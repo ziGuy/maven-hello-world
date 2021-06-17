@@ -25,7 +25,6 @@ jobs:
       run: mvn -B package --file my-app/pom.xml
       
     - name: Display results
-        uses: actions/download-artifact@v2
         shell: bash
         run: |
           ls -l my-app/target
