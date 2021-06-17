@@ -69,7 +69,7 @@ jobs:
 
 
 
-  create_docker:
+  create_push_docker:
     # 2 Do: check why the following action didn't find Docerfile: docker/build-push-action@v2
     needs: [package_result]
     runs-on: ubuntu-latest
@@ -102,7 +102,7 @@ jobs:
 
 
   pull_docker_from_repo:
-    needs: [create_docker]
+    needs: [create_push_docker]
     runs-on: ubuntu-latest
 
     steps:
@@ -122,6 +122,8 @@ jobs:
 
     steps:
     - name: And now fot the answer to the Ultimate Question of Life, the Universe, and Everything
-      run: echo "Umm... I don't want to spoiler, Moty:)"
+      run: |
+        echo "Umm... I don't want to spoiler, Moty:)"
+        echo "Well, now section 6 in the doc file is in your hands."
 
 
