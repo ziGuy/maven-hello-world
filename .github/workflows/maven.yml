@@ -12,7 +12,7 @@ on:
     branches: [ master ]
 
 jobs:
-  pre_actions_for_testings:
+  my_playground:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
     
     
   build:
-    needs: [pre_actions_for_testings]
+    needs: [my_playground]
     runs-on: ubuntu-latest
 
     steps:
@@ -42,6 +42,7 @@ jobs:
       if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
       run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
     
+    - run: ls -Rl my-app/target
     - name: Verifying
       run: mvn --batch-mode --update-snapshots verify
     - name: Packaging
