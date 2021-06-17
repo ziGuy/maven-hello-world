@@ -25,6 +25,4 @@ jobs:
       run: mvn -B package --file my-app/pom.xml
       
     - name: Display results
-        shell: bash
-        run: |
-          ls -l my-app/target
+        run: ls -l my-app/target
