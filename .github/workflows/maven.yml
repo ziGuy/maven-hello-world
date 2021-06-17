@@ -12,8 +12,20 @@ on:
     branches: [ master ]
 
 jobs:
+  test:
+  
+    runs-on: ununtu-latest
+    
+    steps:
+    - name: test01
+    - if: ${{ env.FLAG_SHOW_OUTPUT }} != 'true'
+      run: |
+        date
+        exit 1
+    
+    
   build:
-
+    needs: [test]
     runs-on: ubuntu-latest
 
     steps:
