@@ -40,7 +40,7 @@ jobs:
       run: mvn -B package --file my-app/pom.xml
     
     - name: Display results
-    if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
+      if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
       run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
       
       
