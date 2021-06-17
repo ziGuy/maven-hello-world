@@ -54,11 +54,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download math result for job 1
+    - name: Get build
       uses: actions/download-artifact@v2
       with:
         name: target
-    - run: ls -l target
+    - run: |
+        pwd
+        ls -l
     
 
 
