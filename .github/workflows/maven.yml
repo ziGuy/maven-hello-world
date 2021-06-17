@@ -20,7 +20,7 @@ jobs:
     - name: test01
       run: |
         date
-        exit 1
+        exit 0
     
     
   build:
