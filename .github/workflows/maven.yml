@@ -18,7 +18,7 @@ jobs:
     
     steps:
     - name: test01
-    - run: |
+      run: |
         date
         exit 1
     
