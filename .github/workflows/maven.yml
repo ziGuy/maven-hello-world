@@ -50,6 +50,7 @@ jobs:
       working-directory: my-app
       run: |
         mvn --batch-mode --update-snapshots verify
+        ls -Rl target
         mkdir staging && cp target/*.jar staging
     - name: Packaging
       uses: actions/upload-artifact@v2
