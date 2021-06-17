@@ -96,9 +96,10 @@ jobs:
       run: |
         docker images
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        docker tag ${{ env.APP_NAME }} ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
-        
+
+      # docker tag ${{ env.APP_NAME }} ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
+
     # - name: Create artifact from docker image
     #   uses: actions/upload-artifact@v2
     #   with:
@@ -108,17 +109,18 @@ jobs:
       # cat Dockerfile
       # docker run -t ${{ env.APP_NAME }}
 
-  push_docker_to_repo:
-    needs: [create_docker]
-    runs-on: ubuntu-latest
+  # push_docker_to_repo:
+  #   needs: [create_docker]
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Push docker to repo
-      run: |
-        docker images
-        docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        docker tag ${{ env.APP_NAME }} ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
-        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
+  #   steps:
+  #   - name: Push docker to repo
+  #     run: |
+  #       docker images
+  #       docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+  #       docker tag ${{ env.APP_NAME }} ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
+  #       docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
+
       # run: |
       # docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       # docker tag ${{ env.APP_NAME }} . ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
@@ -131,11 +133,19 @@ jobs:
     steps:
     - name: Pull docker from repo
       run: |
-        echo "EXITING, EDIT ME"
-        exit 1
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         docker pull ${{ env.APP_NAME }}
+        docker run ${{ env.APP_NAME }}
   
+
+
+  meaning_of_life:
+    needs: [pull_docker_from_repo]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Answer to the Ultimate Question of Life, the Universe, and Everything
+      run: echo "Umm... I don't want to spoiler you, Moty:)"
 
   # create_docker:
   #   needs: [package_result]
