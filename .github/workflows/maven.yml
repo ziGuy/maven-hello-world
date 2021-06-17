@@ -96,8 +96,8 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:latest
 
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
     # - run: |
     #     pwd
     #     ls -l
