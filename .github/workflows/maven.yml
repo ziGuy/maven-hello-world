@@ -20,11 +20,9 @@ jobs:
     - name: test01
       working-directory: /tmp/test
       run: |
-        
-        
         echo "Current dir: $(pwd)"
         echo "ziGuy test"
-        exit 1
+        exit 0
     
     
   build:
