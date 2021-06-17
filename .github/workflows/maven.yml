@@ -56,7 +56,6 @@ jobs:
       with:
         name: Package
         path: staging
-      working-directory: my-app
 
       
   # Packaging:     
