@@ -3,7 +3,7 @@
 
 name: Java CI with Maven
 env:
-  FLAG_SHOW_OUTPUT: false
+  FLAG_SHOW_OUTPUT: 0
 
 on:
   push:
@@ -18,6 +18,7 @@ jobs:
     
     steps:
     - name: test01
+      if: ${{ FLAG_SHOW_OUTPUT == 1}}
       run: |
         date
         exit 1
