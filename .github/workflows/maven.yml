@@ -3,7 +3,7 @@
 
 name: Java CI with Maven
 env:
-  flag_show_output: false
+  FLAG_SHOW_OUTPUT: false
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
       run: mvn -B package --file my-app/pom.xml
     
     - name: Display results
-      if: env.flag_show_output != 'true'
+      if: env.FLAG_SHOW_OUTPUT != 'true'
       run: |
         java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
       
