@@ -90,6 +90,20 @@ jobs:
         echo 'CMD ["java", "-jar", "/usr/src/${{ env.APP_NAME }}/${{ env.APP_NAME }}-1.0-SNAPSHOT.jar"]' >>Dockerfile
         
         docker build -f Dockerfile -t ${{ env.APP_NAME }} .
+        docker images
+
+    - name: Push docker to repo
+      run: |
+        docker images
+        docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        docker tag ${{ env.APP_NAME }} ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
+        
+    # - name: Create artifact from docker image
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: docker_image
+    #     path: ${{ env.APP_NAME }}-1.0-SNAPSHOT.jar
       
       # cat Dockerfile
       # docker run -t ${{ env.APP_NAME }}
@@ -101,7 +115,6 @@ jobs:
     steps:
     - name: Push docker to repo
       run: |
-        echo "===="
         docker images
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         docker tag ${{ env.APP_NAME }} ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
@@ -111,7 +124,18 @@ jobs:
       # docker tag ${{ env.APP_NAME }} . ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
       # docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
 
+  pull_docker_from_repo:
+    needs: [push_docker_to_repo]
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Pull docker from repo
+      run: |
+        echo "EXITING, EDIT ME"
+        exit 1
+        docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        docker pull ${{ env.APP_NAME }}
+  
 
   # create_docker:
   #   needs: [package_result]
