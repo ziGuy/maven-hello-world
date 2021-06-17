@@ -12,10 +12,9 @@ on:
     branches: [ master ]
 
 jobs:
-  pre_actions:
-  
+  pre_actions_for_testings:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: test01
       run: |
@@ -25,7 +24,7 @@ jobs:
     
     
   build:
-    needs: [pre_actions]
+    needs: [pre_actions_for_testings]
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +32,7 @@ jobs:
     - name: Set up JDK 8
       uses: actions/setup-java@v2
       with:
-        java-version: '8'
+        java-version: '8' # doesn't work with later versions
         distribution: 'adopt'
     
     - name: custom
@@ -49,7 +48,6 @@ jobs:
       
   Packaging:     
     needs: [build]
-
     runs-on: ubuntu-latest
     
     steps:
@@ -58,7 +56,7 @@ jobs:
            mvn --file my-app/pom.xml --batch-mode --update-snapshots verify
            mkdir staging && cp my-app/target/*.jar staging
     - uses: actions/checkout@v2
-    - uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2
       with:
         name: Package
         path: staging
