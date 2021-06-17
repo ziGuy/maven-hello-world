@@ -89,7 +89,7 @@ jobs:
         echo "WORKDIR /usr/src/${{ env.APP_NAME }}" >>Dockerfile
         echo 'CMD ["java", "-jar", "/usr/src/${{ env.APP_NAME }}/${{ env.APP_NAME }}-1.0-SNAPSHOT.jar"]' >>Dockerfile
         
-        cat Dockerfile
+      # cat Dockerfile
         docker build -f Dockerfile -t ${{ env.APP_NAME }} .
       # docker run -t ${{ env.APP_NAME }}
 
@@ -101,7 +101,7 @@ jobs:
     - name: Push docker to repo
       run: |
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        docker tag ${{ env.APP_NAME }} . ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
+        docker tag ${{ env.APP_NAME }}:latest . ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
       # run: |
       # docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
