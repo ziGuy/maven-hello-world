@@ -23,7 +23,11 @@ jobs:
       with:
         java-version: '8'
         distribution: 'adopt'
-    - name: Build with Maven
+    
+    - name: custom
+      run: exit
+      
+    - name: Build with Maven      
       run: mvn -B package --file my-app/pom.xml
     
     - name: Display results
@@ -31,7 +35,10 @@ jobs:
       run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
       
       
+  Packaging:
+    runs-on: ubuntu-latest
     
+    steps:
     - name: Packaging      
       run: |
            mvn --file my-app/pom.xml --batch-mode --update-snapshots verify
