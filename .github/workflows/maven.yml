@@ -41,22 +41,22 @@ jobs:
       working-directory: my-app
       run: mvn -B package
     
-    - name: Display results
-      if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
-      run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
+    # - name: Display results
+    #   if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
+    #   run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
     
-    - run: ls -Rl my-app/target
-    # - cd my-app/target
-    - name: Verifying
-      # run:
-      #   working-directory: my-app/target
-      #   mvn --batch-mode --update-snapshots verify
-    - name: Packaging
-      run: mkdir staging && cp my-app/target/*.jar staging
-    # - uses: actions/upload-artifact@v2
-    #   with:
-    #     name: Package
-    #     path: staging
+    # - run: ls -Rl my-app/target
+    # # - cd my-app/target
+    # - name: Verifying
+    #   # run:
+    #   #   working-directory: my-app/target
+    #   #   mvn --batch-mode --update-snapshots verify
+    # - name: Packaging
+    #   run: mkdir staging && cp my-app/target/*.jar staging
+    # # - uses: actions/upload-artifact@v2
+    # #   with:
+    # #     name: Package
+    # #     path: staging
 
       
   # Packaging:     
