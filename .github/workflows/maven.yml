@@ -127,7 +127,7 @@ jobs:
       # docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
 
   pull_docker_from_repo:
-    needs: [push_docker_to_repo]
+    needs: [create_docker]
     runs-on: ubuntu-latest
 
     steps:
@@ -144,8 +144,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Answer to the Ultimate Question of Life, the Universe, and Everything
-      run: echo "Umm... I don't want to spoiler you, Moty:)"
+    - name: And now fot the answer to the Ultimate Question of Life, the Universe, and Everything
+      run: echo "Umm... I don't want to spoiler, Moty:)"
 
   # create_docker:
   #   needs: [package_result]
