@@ -53,11 +53,10 @@ jobs:
         mkdir staging && cp target/*.jar staging
         ls -Rl staging
     - name: Packaging
-      run: echo "Current dir: $(pwd)"
       uses: actions/upload-artifact@v2
       with:
         name: Package
-        path: staging
+        path: my-app/staging
 
       
   # Packaging:     
