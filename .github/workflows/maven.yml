@@ -55,8 +55,7 @@ jobs:
       run: |
            mvn --file my-app/pom.xml --batch-mode --update-snapshots verify
            mkdir staging && cp my-app/target/*.jar staging
-    - uses: actions/checkout@v2
-      uses: actions/upload-artifact@v2
+    - uses: [actions/checkout@v2, actions/upload-artifact@v2]
       with:
         name: Package
         path: staging
