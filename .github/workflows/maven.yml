@@ -26,6 +26,7 @@ jobs:
         echo "WORKDIR /usr/src/${app_name}" >>Dockerfile
         echo "CMD ["java", "-jar", "/usr/src/${app_name}/${jar_path}"]" >>Dockerfile
         
+        cat Dockerfile
         docker build -f Dockerfile -t my-app .
         ls -l
         
