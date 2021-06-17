@@ -41,6 +41,7 @@ jobs:
       run: mvn -B package
     
     - name: Packaging build
+      working-directory: my-app
       uses: actions/upload-artifact@v2
       with:
         name: target
