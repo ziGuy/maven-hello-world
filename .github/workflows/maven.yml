@@ -138,8 +138,8 @@ jobs:
     - name: Pull docker from repo
       run: |
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        docker pull ${{ env.APP_NAME }}
-        docker run ${{ env.APP_NAME }}
+        docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.APP_NAME }}
+        docker run ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.APP_NAME }}
   
 
 
