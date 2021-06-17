@@ -95,7 +95,7 @@ jobs:
         echo "ls -l /home/runner/work/maven-hello-world/maven-hello-world"
         ls -l /home/runner/work/maven-hello-world/maven-hello-world
         echo find
-        find /tmp -name "Dockerfile"
+        find /tmp -name "Dockerfile" 2>/dev/null
     - name: Build and push
       id: docker_build
       uses: docker/build-push-action@v2
