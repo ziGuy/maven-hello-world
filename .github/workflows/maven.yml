@@ -26,4 +26,4 @@ jobs:
     - name: Display results
       run: |
         echo "A initial message"
-        run: ls -l my-app/target
+        ls -Rl my-app/target
