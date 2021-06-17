@@ -25,37 +25,37 @@ jobs:
         exit 1
     
     
-  build:
-    needs: [my_playground]
-    runs-on: ubuntu-latest
+  # build:
+  #   needs: [my_playground]
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 8
-      uses: actions/setup-java@v2
-      with:
-        java-version: '8' # doesn't work with later versions
-        distribution: 'adopt'
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Set up JDK 8
+  #     uses: actions/setup-java@v2
+  #     with:
+  #       java-version: '8' # doesn't work with later versions
+  #       distribution: 'adopt'
           
-    - name: Build with Maven      
-      run: mvn -B package --file my-app/pom.xml
+  #   - name: Build with Maven      
+  #     run: mvn -B package --file my-app/pom.xml
     
-    - name: Display results
-      if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
-      run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
+  #   - name: Display results
+  #     if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
+  #     run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
     
-    - run: ls -Rl my-app/target
-    # - cd my-app/target
-    - name: Verifying
-      # run:
-      #   working-directory: my-app/target
-      #   mvn --batch-mode --update-snapshots verify
-    - name: Packaging
-      run: mkdir staging && cp my-app/target/*.jar staging
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Package
-        path: staging
+  #   - run: ls -Rl my-app/target
+  #   # - cd my-app/target
+  #   - name: Verifying
+  #     # run:
+  #     #   working-directory: my-app/target
+  #     #   mvn --batch-mode --update-snapshots verify
+  #   - name: Packaging
+  #     run: mkdir staging && cp my-app/target/*.jar staging
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: Package
+  #       path: staging
 
       
   # Packaging:     
