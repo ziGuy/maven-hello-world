@@ -46,7 +46,9 @@ jobs:
       run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
       
       
-  Packaging:
+  Packaging:     
+    needs: [build]
+
     runs-on: ubuntu-latest
     
     steps:
