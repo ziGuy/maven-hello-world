@@ -24,7 +24,7 @@ jobs:
         exit 0
     
     
-  build_package:
+  build:
     needs: [my_playground]
     runs-on: ubuntu-latest
 
@@ -40,61 +40,84 @@ jobs:
       working-directory: my-app
       run: mvn -B package
     
-    # - name: Display results
-    #   if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
-    #   run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
-    
-    # - run: ls -Rl my-app/target
-    # # - cd my-app/target
-    - name: Verifying
-      working-directory: my-app
-      run: |
-        mvn --batch-mode --update-snapshots verify
-        mkdir staging && cp target/*.jar staging
-        ls -Rl staging
-    - name: Packaging
-      uses: actions/upload-artifact@v2
+    - name: Packaging build
+        uses: actions/upload-artifact@v2
+        with:
+          name: target
+          path: target
+
+
+
+    package_result:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download math result for job 1
+      uses: actions/download-artifact@v2
       with:
-        name: Package
-        path: my-app/staging
-
-      
-  # Packaging:     
-  #   needs: [build]
-  #   runs-on: ubuntu-latest
+        name: target
+    - run: ls -l target
     
-  #   steps:
+
+
   #   - uses: actions/checkout@v2
-  #   - uses: actions/setup-java@v2
-  #     with:
-  #       java-version: '8' # doesn't work with later versions
-  #       distribution: 'adopt'
-  #   - name: Show file structure
-  #     run: ls -Rl my-app/target
-  #   - run: mvn --batch-mode --update-snapshots verify
-  #   - run: mkdir staging && cp my-app/target/*.jar staging
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: Package
-  #       path: staging
-
-
-
-  # Packaging:     
-  #   needs: [build]
-  #   runs-on: ubuntu-latest
+  #   - name: Set up JDK 8
+  #   # - name: Display results
+  #   #   if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
+  #   #   run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
     
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Packaging      
+  #   # - run: ls -Rl my-app/target
+  #   # # - cd my-app/target
+  #   - name: Verifying
+  #     working-directory: my-app
+  #     run: |
+  #       mvn --batch-mode --update-snapshots verify
+  #       mkdir staging && cp target/*.jar staging
+  #       ls -Rl staging
+  #   - name: Packaging
   #     uses: actions/upload-artifact@v2
   #     with:
   #       name: Package
-  #       path: staging
-  #       run: |
-  #            mvn --file my-app/pom.xml --batch-mode --update-snapshots verify
-  #            mkdir staging && cp my-app/target/*.jar staging
+  #       path: my-app/staging
 
-  #   - name: Show file structure
-  #     run: |
-  #       ls -Rl my-app/target
+      
+  # # Packaging:     
+  # #   needs: [build]
+  # #   runs-on: ubuntu-latest
+    
+  # #   steps:
+  # #   - uses: actions/checkout@v2
+  # #   - uses: actions/setup-java@v2
+  # #     with:
+  # #       java-version: '8' # doesn't work with later versions
+  # #       distribution: 'adopt'
+  # #   - name: Show file structure
+  # #     run: ls -Rl my-app/target
+  # #   - run: mvn --batch-mode --update-snapshots verify
+  # #   - run: mkdir staging && cp my-app/target/*.jar staging
+  # #   - uses: actions/upload-artifact@v2
+  # #     with:
+  # #       name: Package
+  # #       path: staging
+
+
+
+  # # Packaging:     
+  # #   needs: [build]
+  # #   runs-on: ubuntu-latest
+    
+  # #   steps:
+  # #   - uses: actions/checkout@v2
+  # #   - name: Packaging      
+  # #     uses: actions/upload-artifact@v2
+  # #     with:
+  # #       name: Package
+  # #       path: staging
+  # #       run: |
+  # #            mvn --file my-app/pom.xml --batch-mode --update-snapshots verify
+  # #            mkdir staging && cp my-app/target/*.jar staging
+
+  # #   - name: Show file structure
+  # #     run: |
+  # #       ls -Rl my-app/target
