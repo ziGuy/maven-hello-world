@@ -96,8 +96,9 @@ jobs:
       run: |
         docker images
         docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
+        docker push ${{ env.APP_NAME }}
 
+      # docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
       # docker push ${{ secrets.DOCKER_HUB_USERNAME }}/rafael:${{ env.APP_NAME }}
       # docker tag ${{ env.APP_NAME }} ${{ secrets.DOCKER_HUB_USERNAME }}/rafael
 
