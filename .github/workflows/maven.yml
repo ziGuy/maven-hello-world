@@ -17,6 +17,7 @@ jobs:
 
     steps:
     - name: test01
+      working-directory: /tmp
       run: |
         date
         pwd
