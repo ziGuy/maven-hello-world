@@ -25,7 +25,7 @@ jobs:
       # echo "COPY ${jar_path} /usr/src/${app_name}/" >>Dockerfile
       # echo "WORKDIR /usr/src/${app_name}" >>Dockerfile
       # echo "CMD ["java", "-jar", "/usr/src/${app_name}/${jar_path}"]" >>Dockerfile
-        echo 'CMD ["date"]' >>Dockerfile
+        echo CMD ["date"] >>Dockerfile
         
         cat Dockerfile
         docker build -f Dockerfile -t my-app .
