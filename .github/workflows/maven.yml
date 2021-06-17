@@ -18,11 +18,7 @@ jobs:
     
     steps:
     - name: test01
-      # if: ${{ env.FLAG_SHOW_OUTPUT == 1 }}
-      # run: |
-        # date
-        # exit 1
-        run: exit 0
+      run: exit 0
     
     
   build:
