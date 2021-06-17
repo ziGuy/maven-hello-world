@@ -27,14 +27,14 @@ jobs:
       run: mvn -B package --file my-app/pom.xml
     
     - name: Display results
-      if: env.FLAG_SHOW_OUTPUT != 'true'
-      run: |
-        java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
+      if: ${{ env.FLAG_SHOW_OUTPUT }} != 'true'
+      run: java -jar my-app/target/my-app-1.0-SNAPSHOT.jar
       
       
       
     - name: Packaging
-      run: mvn --batch-mode --update-snapshots verify
+      run: |
+           mvn --batch-mode --update-snapshots verify
            mkdir staging && cp my-app/target/*.jar staging
     - uses: actions/upload-artifact@v2
       with:
