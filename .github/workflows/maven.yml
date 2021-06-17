@@ -58,9 +58,16 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: target
-    - run: |
-        pwd
-        ls -l
+    
+    - name: isolate exec
+      uses: actions/upload-artifact@v2
+      with:
+        name: final_exec
+        path: my-app-1.0-SNAPSHOT.jar
+
+    # - run: |
+    #     pwd
+    #     ls -l
     
 
 
