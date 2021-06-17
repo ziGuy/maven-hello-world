@@ -24,6 +24,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file my-app/pom.xml
     - name: Display results
-     - run: |
+      run: |
         echo "A initial message"
         run: ls -l my-app/target
