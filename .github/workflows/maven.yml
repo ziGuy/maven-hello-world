@@ -4,6 +4,7 @@
 name: Java CI with Maven
 env:
   FLAG_SHOW_OUTPUT: 0
+  APP_NAME: "my-app"
 
 on:
   push:
@@ -16,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: mkdir /tmp/test
+    - run: mkdir /tmp/${{ env.APP_NAME }}
     - name: test01
-      working-directory: /tmp/test
+      working-directory: /tmp/${{ env.APP_NAME }}
       run: |
         echo "Current dir: $(pwd)"
         echo "ziGuy test"
@@ -38,7 +39,7 @@ jobs:
         distribution: 'adopt'
           
     - name: Build with Maven      
-      working-directory: my-app
+      working-directory: ${{ env.APP_NAME }}
       run: |
           mvn -B package
           ls -lR target
@@ -46,7 +47,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: target
-        path: my-app/target
+        path: ${{ env.APP_NAME }}/target
 
 
 
@@ -66,10 +67,11 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: final_exec
-        path: my-app-1.0-SNAPSHOT.jar
+        path: ${{ env.APP_NAME }}-1.0-SNAPSHOT.jar
 
 
   create_docker:
+    # 2 Do: check why the following action didn't find Docerfile: docker/build-push-action@v2
     needs: [package_result]
     runs-on: ubuntu-latest
 
@@ -82,15 +84,14 @@ jobs:
       run: |
         echo "FROM openjdk:8" >>Dockerfile
         echo "MAINTAINER Guy Ziv guyziv84@gmail.com" >>Dockerfile
-        echo "WORKDIR /usr/src/my-app" >>Dockerfile
-        echo "COPY my-app-1.0-SNAPSHOT.jar /usr/src/my-app/" >>Dockerfile
-        echo "WORKDIR /usr/src/my-app" >>Dockerfile
-        echo 'CMD ["java", "-jar", "/usr/src/my-app/my-app-1.0-SNAPSHOT.jar"]' >>Dockerfile
+        echo "WORKDIR /usr/src/${{ env.APP_NAME }}" >>Dockerfile
+        echo "COPY ${{ env.APP_NAME }}-1.0-SNAPSHOT.jar /usr/src/${{ env.APP_NAME }}/" >>Dockerfile
+        echo "WORKDIR /usr/src/${{ env.APP_NAME }}" >>Dockerfile
+        echo 'CMD ["java", "-jar", "/usr/src/${{ env.APP_NAME }}/${{ env.APP_NAME }}-1.0-SNAPSHOT.jar"]' >>Dockerfile
         
         cat Dockerfile
-        docker build -f Dockerfile -t my-app .
-        docker run -t my-app
-        ls -l
+        docker build -f Dockerfile -t ${{ env.APP_NAME }} .
+        docker run -t ${{ env.APP_NAME }}
 
 
 
