@@ -47,10 +47,11 @@ jobs:
     
     # - run: ls -Rl my-app/target
     # # - cd my-app/target
-    # - name: Verifying
-    #   # run:
-    #   #   working-directory: my-app/target
-    #   #   mvn --batch-mode --update-snapshots verify
+    - name: Verifying
+      working-directory: my-app/target
+      run:
+        mvn --batch-mode --update-snapshots verify
+        mkdir staging && cp my-app/target/*.jar staging
     # - name: Packaging
     #   run: mkdir staging && cp my-app/target/*.jar staging
     # # - uses: actions/upload-artifact@v2
