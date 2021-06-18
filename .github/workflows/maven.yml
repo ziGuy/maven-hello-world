@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Guy Ziv Pipeline
 env:
   FLAG_SHOW_OUTPUT: 0
   APP_NAME: "my-app"
@@ -101,7 +101,7 @@ jobs:
 
 
 
-  pull_docker_from_repo:
+  pull_run_docker:
     needs: [create_push_docker]
     runs-on: ubuntu-latest
 
