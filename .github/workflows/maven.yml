@@ -121,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: And now fot the answer to the Ultimate Question of Life, the Universe, and Everything
+    - name: And now for the answer to the Ultimate Question of Life, the Universe, and Everything
       run: |
         echo "Umm... I don't want to spoiler, Moty:)"
         echo "Well, now section 6 in the doc file is in your hands."
