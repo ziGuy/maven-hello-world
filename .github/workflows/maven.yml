@@ -117,7 +117,7 @@ jobs:
 
 
   meaning_of_life:
-    needs: [pull_docker_from_repo]
+    needs: [pull_run_docker]
     runs-on: ubuntu-latest
 
     steps:
